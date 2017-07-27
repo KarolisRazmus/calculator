@@ -40,7 +40,7 @@
               <p>Calculator by Karolis</p>
             </div>
           </div>
-          <div id="middle" class="inner cover">
+          <div id="middle" class="col-xs-6 col-xs-offset-3 inner cover">
 
 
 
@@ -86,109 +86,42 @@
 
     <script>
 
-    var array = {
-    			"1": {
-    	"type": 'number',	
-    	"value": 1,	
-        "id": 1,
-	    },
-	    		"2": {
-    	"type": 'number',	
-    	"value": 2,	
-        "id": 2,
-	    },
-	        	"3": {
-    	"type": 'number',	
-    	"value": 3,	
-        "id": 3,
-	    },
-	        	"4": {
-    	"type": 'number',	
-    	"value": 4,	
-        "id": 4,
-	    },
-	        	"5": {
-    	"type": 'number',	
-    	"value": 5,	
-        "id": 5,
-	    },
-	        	"6": {
-    	"type": 'number',	
-    	"value": 6,	
-        "id": 6,
-	    },
-	        	"7": {
-    	"type": 'number',	
-    	"value": 7,	
-        "id": 7,
-	    },
-	        	"8": {
-    	"type": 'number',	
-    	"value": 8,	
-        "id": 8,
-	    },
-	        	"9": {
-    	"type": 'number',	
-    	"value": 9,	
-        "id": 9,
-	    },
-	        	"0": {
-    	"type": 'number',	
-    	"value": 0,	
-        "id": 0,
-	    },
-	           	"+": {
-    	"type": 'action',	
-    	"value": '+',	
-        "id": 0,
-	    },
-	           	"-": {
-    	"type": 'action',	
-    	"value": '-',	
-        "id": 0,
-	    },
-	           	"/": {
-    	"type": 'action',	
-    	"value": '/',	
-        "id": 0,
-	    },
-	           	"*": {
-    	"type": 'action',	
-    	"value": '*',	
-        "id": 0,
-	    },
-	           	"%": {
-    	"type": 'action',	
-    	"value": '%',	
-        "id": 0,
-	    },
-	           	"=": {
-    	"type": 'result',	
-    	"value": '=',	
-        "id": 0,
-	    },
+    var data = {
+    			"1": {"type": 'number',	"value": 1 },
+	    		"2": {"type": 'number',	"value": 2 },
+	        	"3": {"type": 'number',	"value": 3 },
+	        	"4": {"type": 'number',	"value": 4 },
+	        	"5": {"type": 'number',	"value": 5 },
+	        	"6": {"type": 'number',	"value": 6 },
+	        	"7": {"type": 'number',	"value": 7 },
+	        	"8": {"type": 'number',	"value": 8 },
+	        	"9": {"type": 'number',	"value": 9 },
+	        	"0": {"type": 'number',	"value": 0 },
+	           	"+": {"type": 'action',	"value": '+' },
+	           	"-": {"type": 'action',	"value": '-' },
+	           	"/": {"type": 'action',	"value": '/' },
+	           	"*": {"type": 'action',	"value": '*' },
+	           	"%": {"type": 'action',	"value": '%' },
+	           	"=": {"type": 'result',	"value": '=' }
     };
 
     	$(document).ready(function(){
 
-            var $newButton = $('<input/>', {
+            var $newInput = $('<input/>', {
                 id: 'result-input',
                 type: 'text',
                 'class': 'custom-btn btn btn-lg btn-default',
-                // value: itemProperties.value,
-                value: '',
-
+                value: ''
             });
 
             var $newDiv = $('<div/>', {
-                'class': 'col-xs-offset-1 col-xs-10',
+                'class': 'col-xs-12'
             });
      
-            $newDiv.append($newButton);
-     
+            $newDiv.append($newInput);
             $("#middle").prepend($newDiv);
+	    });
 
-	    });   	
 
 		function addElementsToDom(item, itemProperties){
  
@@ -196,62 +129,56 @@
                 id: itemProperties.type,
                 type: 'button',
                 'class': 'custom-btn btn btn-lg btn-default',
-                value: itemProperties.value,
-                html: item,
-
+                value: itemProperties.value
             });
 
 	    	var $newDiv = $('<div/>', {
-	 			'class': 'col-xs-3',
+	 			'class': 'col-xs-3'
 			});
 	 
 	   		$newDiv.append($newButton);
-	 
 			$("#middle").append($newDiv);
+ 		}
  
- 		};
- 
-		for (var buttonValue in array) {
-
-        	addElementsToDom(buttonValue, array[buttonValue]);
-
-    	};
-
-    	$('.custom-btn').click(function() {
-
-            if(this.id == 'number')
-            {
-                var inputValue = $('#result-input').val();
-                $('#result-input').val(inputValue + this.value);
-            }
-
-//             switch ($('#result-input').val()) {
-//                 case '':
-//                 $('#result-input').val(this.value);
-//                 break;
-//     case 'number':
-//         $('#result-input').val('kuku');
-//         break;
-//     case 2:
-//         day = "Tuesday";
-//         break;
-//     case 3:
-//         day = "Wednesday";
-//         break;
-//     case 4:
-//         day = "Thursday";
-//         break;
-//     case 5:
-//         day = "Friday";
-//         break;
-//     case 6:
-//         day = "Saturday";
-// }
-
-		});
- 
+		for (var item in data) {
+        	addElementsToDom(item, data[item]);
+    	}
 
 
-	</script>
+    $('.custom-btn').click(function() {
+
+        var input = $('#result-input');
+
+        switch (this.id) {
+            case 'number':
+            case 'action':
+                input.val(input.val() + this.value);
+                break;
+            case 'result':
+                for (var item in data)
+                    if (data[item].type == 'action') {
+
+                        var x = data[item].value;
+
+                        if (input.val().split(x)[1] != undefined)
+                        {
+                            if (x != '%')
+                            {
+                                var firstNumber = input.val().split(x)[0];
+                                var secondNumber = input.val().split(x)[1];
+
+                                if (secondNumber.includes("%")) {
+                                    secondNumber = '(' + secondNumber.replace('%', '') + '/' + '100' + '*' + firstNumber + ')';
+                                }
+
+                                input.val(eval(firstNumber + x + secondNumber).toFixed(2));
+                            }
+                        }
+                    }
+        }
+    });
+
+
+    </script>
   </body>
 </html>
