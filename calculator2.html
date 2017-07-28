@@ -102,7 +102,8 @@
 	           	"/": {"type": 'action',	"value": '/' },
 	           	"*": {"type": 'action',	"value": '*' },
 	           	"%": {"type": 'action',	"value": '%' },
-	           	"=": {"type": 'result',	"value": '=' }
+	           	"=": {"type": 'result',	"value": '=' },
+                "C": {"type": 'result', "value": 'C' }
     };
 
     	$(document).ready(function(){
@@ -145,6 +146,8 @@
     	}
 
 
+
+
     $('.custom-btn').click(function() {
 
         var input = $('#result-input');
@@ -155,6 +158,10 @@
                 input.val(input.val() + this.value);
                 break;
             case 'result':
+                if(this.id == 'C')
+                {
+                    input.val('');
+                }
                 for (var item in data)
                     if (data[item].type == 'action') {
 
