@@ -148,6 +148,8 @@
 
     var actions = [];
 
+    var sum = '' 
+
 
     $('.custom-btn').click(function() {
 
@@ -155,8 +157,15 @@
 
         switch (this.id) {
             case 'number':
+                input.val(input.val() + this.value);
+                sum += this.value;
+                break;
             case 'action':
                 input.val(input.val() + this.value);
+                sum += this.value;
+                break;
+            case '%' :
+
                 break;
             case 'result':
                 if(this.id == 'C')
@@ -172,39 +181,34 @@
 
                         if (input.val().indexOf(x) !== -1){
 
-// actions[input.val()['5']] = x;
+                            for (var i = 0; i < input.val().length -1; i++) {
 
-                            for (var i = 0; i > input.val().length -1; i++) {
+                                if(input.val()[i] == x) {
 
-console.log('1');
+                                   console.log(i);
+                                   console.log(x);
 
-                                if(input.val()[i] !== -1) {
-
-                                    
+                                   actions[i] = x;
 
                                 }
                             }
+
+                            console.log(actions);
+
                         }
 
 
+                            // console.log(input.val()[i]);
+                            // console.log('kuku');
+                            // console.log(x);
 
 
-
-
-
-                            console.log(input.val()[i]);
-                            console.log('kuku');
-                            console.log(x);
-
-
-                            console.log(actions);
+                            // console.log(actions);
 
 
                             // var actions.push(x)
 
-
-                        
-
+                }
 
                         if (input.val().split(x)[1] != undefined)
 
@@ -221,7 +225,12 @@ console.log('1');
                                 input.val(eval(firstNumber + x + secondNumber).toFixed(2));
                             }
                         }
-                    }
+
+
+
+
+
+                    
         }
     });
 
